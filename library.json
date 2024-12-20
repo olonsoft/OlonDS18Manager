@@ -1,0 +1,28 @@
+{
+  "name": "OlonDS18Manager",
+  "version": "1.0.0",
+  "description": "Dallas sensors reading",
+  "keywords": "dallas",
+  "authors": {
+    "name": "Dimitris Paterakis",
+    "url": "https://github.com/olonsoft"
+  },
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": [
+    "espressif8266",
+    "espressif32"
+  ],
+  "headers": "OlonDS18Manager.h",
+  "dependencies": [
+    {
+      "owner": "milesburton",
+      "name": "DallasTemperature",
+      "version": "^3.11.0",
+      "platforms": ["espressif8266", "espressif32"]
+    },
+    {
+      "paulstoffregen/OneWire": "^2.3.8"
+    }
+  ]
+}
