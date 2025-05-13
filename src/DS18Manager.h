@@ -1,11 +1,13 @@
 #include <Arduino.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <functional>  // Needed for std::function
 
 namespace Olon {
 
 class DS18Manager {
   private:
+    using OnCompleteCallback = std::function<void(bool success)>;
     OneWire oneWire;
     DallasTemperature sensors;
     uint8_t oneWirePin;
@@ -14,8 +16,7 @@ class DS18Manager {
     unsigned long lastRequestTime;
     bool requestInProgress;
     bool timeoutEnabled;
-
-    void (*onCompleteCallback)(bool success);  // Function pointer for the callback
+    OnCompleteCallback onCompleteCallback = nullptr;
 
   public:
     DS18Manager() : oneWire(0), sensors(&oneWire) {
@@ -76,7 +77,7 @@ class DS18Manager {
     }
 
     // Set the callback function to be called when data is read or timeout occurs
-    void onComplete(void (*callback)(bool success)) {
+    void onComplete(OnCompleteCallback callback) {
       onCompleteCallback = callback;
     }
 
